@@ -29,6 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
         Optional<UserCredentialsEntity> user = userCredentialsDao.findByName(username); // Assuming username is unique
+        System.out.println("user optional entity : " + user);
         if (user.isPresent()) {
         	List<String> allRoles = null;
             Integer userId = user.get().getId();
@@ -41,7 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             } catch (Exception e) {
                 throw new UsernameNotFoundException("Failed to fetch roles for userId: " + userId, e);
             }
-
+            System.out.println("allRoles : " + allRoles);
             return new CustomUserDetails(user.get(), allRoles);
         } else {
             throw new UsernameNotFoundException("User not found for username: " + username);

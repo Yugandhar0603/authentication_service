@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserRolesPojo {
-	
+public class UserRoleTokenPojo {
 	private String name;
-	private String password;
-    private List<Integer> allRolesId;
-
+	private List<String> allRoles;
+	private String token;
 }
-
