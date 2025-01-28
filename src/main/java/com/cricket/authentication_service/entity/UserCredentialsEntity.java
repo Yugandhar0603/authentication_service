@@ -1,3 +1,4 @@
+
 package com.cricket.authentication_service.entity;
 
 import jakarta.persistence.Column;
