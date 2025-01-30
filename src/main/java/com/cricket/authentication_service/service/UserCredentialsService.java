@@ -4,12 +4,11 @@ package com.cricket.authentication_service.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
 import com.cricket.authentication_service.entity.UserCredentialsEntity;
+import com.cricket.authentication_service.pojo.PlayerPojo;
 import com.cricket.authentication_service.pojo.UserRolePojoCreate;
 import com.cricket.authentication_service.pojo.UserRolesPojo;
 import com.cricket.authentication_service.repository.UserCredentialsRepository;
@@ -30,6 +29,9 @@ public class UserCredentialsService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+    private PlayerServiceFeignClient playerServiceFeignClient;
 
 	public UserRolesPojo register(UserRolesPojo user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -41,6 +43,11 @@ public class UserCredentialsService {
 		// use feign client and send the role ids and generated user id to user_roles table and insert
 		
 //		userRolesFeignClient.addUserRoles(request);
+		if (user.getAllRolesId().contains(1)) { // Replace getPlayerRoleId() with actual Player role ID
+            // Add entry to Players table
+            playerServiceFeignClient.createPlayer(new PlayerPojo(newUser.getId(), user.getName()));
+        }
+		
 		
 		return user;
 	}
