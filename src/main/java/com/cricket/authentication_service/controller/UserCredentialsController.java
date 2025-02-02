@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,4 +65,8 @@ public class UserCredentialsController {
 		}
 		return null;
 	}
+	 @GetMapping("/user-id/{username}")
+    public Integer getUserIdByUsername(@PathVariable String username) {
+        return userCredService.getUserIdByUsername(username);
+    }
 }

@@ -2,6 +2,7 @@
 package com.cricket.authentication_service.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,7 +52,6 @@ public class UserCredentialsService {
 		
 		return user;
 	}
-
 	public String generateToken(String name, List<String> allRoles) {
 		return jwtService.generateToken(name, allRoles);
 	}
@@ -65,5 +65,9 @@ public class UserCredentialsService {
 		// TODO Auto-generated method stub
 		return authDao.findAll();
 	}
+	public Integer getUserIdByUsername(String username) {
+        Optional<UserCredentialsEntity> user = authDao.findByName(username);
+        return user.map(UserCredentialsEntity::getId).orElse(null);  // Return null if user is not found
+    }
 
 }

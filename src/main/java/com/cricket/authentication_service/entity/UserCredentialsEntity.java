@@ -11,9 +11,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+import java.time.LocalDate;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
+
 
 @Entity
 @Table(name="users")
