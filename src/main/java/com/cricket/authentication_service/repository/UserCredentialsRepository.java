@@ -18,4 +18,6 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
 
 	public void save(UserRolesPojo user);
 
+	public boolean existsByName(String name);
+
 }
